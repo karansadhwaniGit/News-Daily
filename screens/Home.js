@@ -6,6 +6,7 @@ import {
   TextInput,
   SafeAreaView,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import { Button, Image, Text } from "react-native-elements";
 import {
@@ -16,7 +17,7 @@ import {
 } from "../assets/Colors";
 import { FlatList } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
-export function HomeScreen() {
+export function HomeScreen({ navigation }) {
   const DATA = [
     {
       id: "1",
@@ -67,56 +68,58 @@ export function HomeScreen() {
   // Latest News Card
   const renderItem = ({ item }) => {
     return (
-      <View
-        style={{
-          marginTop: 10,
-          position: "relative",
-          marginLeft: 10,
-        }}
-      >
-        <Image
-          resizeMode="contain"
-          source={require("./2.jpg")}
+      <TouchableOpacity onPress={() => navigation.navigate("Detail", item.id)}>
+        <View
           style={{
-            width: 280,
-            height: 221,
-            borderRadius: 16,
-            backgroundColor: "rgba(0,0,0,0.3)",
+            marginTop: 10,
+            position: "relative",
+            marginLeft: 10,
           }}
-        ></Image>
-        <View style={{ position: "absolute", top: 40, left: 10 }}>
-          <Text
+        >
+          <Image
+            resizeMode="contain"
+            source={require("./2.jpg")}
             style={{
-              marginTop: 10,
-              color: "white",
-              fontSize: 12,
-              fontWeight: "100",
+              width: 280,
+              height: 221,
+              borderRadius: 16,
+              backgroundColor: "rgba(0,0,0,0.3)",
             }}
-          >
-            {item.author}
-          </Text>
-          <Text
-            style={{
-              marginBottom: 10,
-              color: "white",
-              fontSize: 18,
-              fontWeight: "bold",
-            }}
-          >
-            {item.headline}
-          </Text>
-          <Text
-            style={{
-              marginTop: 40,
-              color: "white",
-              fontSize: 10,
-              fontWeight: "100",
-            }}
-          >
-            "{item.bottomLine}"
-          </Text>
+          ></Image>
+          <View style={{ position: "absolute", top: 40, left: 10 }}>
+            <Text
+              style={{
+                marginTop: 10,
+                color: "white",
+                fontSize: 12,
+                fontWeight: "100",
+              }}
+            >
+              {item.author}
+            </Text>
+            <Text
+              style={{
+                marginBottom: 10,
+                color: "white",
+                fontSize: 18,
+                fontWeight: "bold",
+              }}
+            >
+              {item.headline}
+            </Text>
+            <Text
+              style={{
+                marginTop: 40,
+                color: "white",
+                fontSize: 10,
+                fontWeight: "100",
+              }}
+            >
+              "{item.bottomLine}"
+            </Text>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
   //Category Item
@@ -167,11 +170,11 @@ export function HomeScreen() {
         />
         <Button
           title=""
-          icon={<Icon name="search" size={15} color="#111111" />}
+          icon={<Icon name="search" size={18} color="#818181" />}
           buttonStyle={{
             backgroundColor: "transparent",
             borderColor: "#818181",
-            borderWidth: 1,
+            // borderWidth: 1,
             padding: 7,
           }}
         />
